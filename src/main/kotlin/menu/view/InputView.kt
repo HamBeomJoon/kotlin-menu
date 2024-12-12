@@ -16,7 +16,7 @@ object InputView {
                 Validator.validateCoachName(input)
                 val coachList = mutableListOf<Coach>()
                 for (name in input.split(",")) {
-                    coachList.add(Coach(name = name, cantEat = null))
+                    coachList.add(Coach(name = name, cantEat = null, recommend = mutableListOf()))
                 }
                 return coachList
             } catch (e: IllegalArgumentException) {
