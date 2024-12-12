@@ -1,5 +1,7 @@
 package menu.controller
 
+import camp.nextstep.edu.missionutils.Randoms
+import menu.model.Coach
 import menu.model.Menu
 import menu.view.InputView
 import menu.view.OutputView
@@ -8,6 +10,7 @@ class MenuController {
     private val inputView = InputView
     private val outputView = OutputView
     private val menuList = mutableListOf<Menu>()
+    private val recommendCategories = mutableListOf<String>()
 
     init {
         val japaneseFood = listOf("규동", "우동", "미소시루", "스시", "가츠동", "오니기리", "하이라이스", "라멘", "오코노미야끼")
@@ -33,5 +36,40 @@ class MenuController {
         }
 
         println(coachList)
+        recommendMenu(coachList)
+    }
+
+    private fun recommendMenu(coachList: List<Coach>) {
+        val categories = mutableListOf<Int>()
+
+        repeat(5) {
+            var category: Int
+            while (true) {
+                category = Randoms.pickNumberInRange(1, 5)
+                if (categories.count { it == category } != 2) {
+                    categories.add(category)
+                    when (category) {
+                        1 -> recommendCategories.add("일식")
+                        2 -> recommendCategories.add("한식")
+                        3 -> recommendCategories.add("중식")
+                        4 -> recommendCategories.add("아시안")
+                        5 -> recommendCategories.add("양식")
+                    }
+                    break
+                }
+            }
+
+            val menus = menuList.filter { it.type == category }.map { it.name }
+
+            for (coach in coachList) {
+                while (true) {
+                    val menu = Randoms.shuffle(menus)[0]
+                    if (menu !in coach.recommend) {
+                        coach.recommend.add(menu)
+                        break
+                    }
+                }
+            }
+        }
     }
 }
