@@ -25,7 +25,13 @@ class MenuController {
 
     fun start() {
         outputView.printStartMessage()
-        inputView.getCoachNames()
+        val coachList = inputView.getCoachNames()
 
+        for (coach in coachList) {
+            val cantEatFood = inputView.getCantEatFood(coach.name, menuList)
+            coach.cantEat = cantEatFood
+        }
+
+        println(coachList)
     }
 }
