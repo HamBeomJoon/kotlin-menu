@@ -35,8 +35,16 @@ class MenuController {
             coach.cantEat = cantEatFood
         }
 
-        println(coachList)
         recommendMenu(coachList)
+
+        println("메뉴 추천 결과입니다.")
+        println("[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]")
+        println("[ 카테고리 | ${recommendCategories.joinToString(" | ")} ]")
+        for (coach in coachList) {
+            println("[ ${coach.name} | ${coach.recommend.joinToString(" | ")} ]")
+        }
+
+        println("추천을 완료했습니다.")
     }
 
     private fun recommendMenu(coachList: List<Coach>) {
