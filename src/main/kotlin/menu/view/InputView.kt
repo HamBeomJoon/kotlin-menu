@@ -25,6 +25,15 @@ object InputView {
         }
     }
 
+    fun getCantEatFood(name: String, menuList: List<Menu>): List<String> {
+        while (true) {
+            println("\n${name}(이)가 못 먹는 메뉴를 입력해주세요.")
+            val input = Console.readLine()
+            try {
+                if (input == "") return listOf()
+                Validator.validateFoodCount(input)
+                Validator.validateMenu(input, menuList)
+                return input.split(",").toList()
             } catch (e: IllegalArgumentException) {
                 println(e.message)
             }
