@@ -44,7 +44,7 @@ class MenuController {
             println("[ ${coach.name} | ${coach.recommend.joinToString(" | ")} ]")
         }
 
-        println("추천을 완료했습니다.")
+        println("\n추천을 완료했습니다.")
     }
 
     private fun recommendMenu(coachList: List<Coach>) {
@@ -72,7 +72,7 @@ class MenuController {
             for (coach in coachList) {
                 while (true) {
                     val menu = Randoms.shuffle(menus)[0]
-                    if (menu !in coach.recommend) {
+                    if (menu !in coach.recommend || menu in coach.cantEat) {
                         coach.recommend.add(menu)
                         break
                     }

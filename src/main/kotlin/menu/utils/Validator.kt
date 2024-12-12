@@ -14,7 +14,7 @@ object Validator {
     }
 
     fun validateFoodCount(input: String) {
-        require(input.split(",").size in 0..2) { Constants.ERROR_COACH_COUNT }
+        require(input.split(",").size in 0..2) { Constants.ERROR_FOOD_COUNT }
     }
 
     fun validateMenu(input: String, menuList: List<Menu>) {
